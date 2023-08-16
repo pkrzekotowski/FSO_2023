@@ -24,11 +24,11 @@ sequenceDiagram
     server-->>browser: Javascript file
     deactivate server
 
-    Note right of the browser: The browser starts executing JS code which fetches JSON from the server
+    Note right of browser: The browser starts executing JS code which fetches JSON from the server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
     server-->>browser: json file
     deactivate server
 
-    Note right of the browser: The browser executes callback function that renders the notes
+    Note right of browser: The browser executes callback function that renders the notes
