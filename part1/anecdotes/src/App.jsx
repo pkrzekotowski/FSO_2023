@@ -1,11 +1,36 @@
 import { useState } from 'react'
 
-const Button = ({ onClick, text }) => {
+const Button = ({ onClick, text, }) => {
   return(
-    <div>
       <button onClick={onClick}>
         {text}
       </button>
+  )
+}
+
+const Votes = ({ votes, selected }) => {
+  return(
+    <div>
+      has {votes[selected]} votes
+    </div>
+  )
+}
+
+const HighlightedAnecdote = ({ anecdotes, votes, index }) => {
+
+for(let i = 1; i < anecdotes.length; i++) {
+  if(votes[i] === index) {
+    return (
+      <div>
+      {anecdotes[i]}
+      </div>
+    )
+  }
+}
+
+  return (
+    <div>
+    {anecdotes[0]}
     </div>
   )
 }
@@ -23,15 +48,27 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(new Array(8).fill(0))
 
-  console.log('state before', selected)
-  const handleClick = () => setSelected(Math.floor(Math.random() * 8))
-  console.log('state after', selected)
+  const highestVotes = Math.max(...votes)
+
+  const randomNumber = () => Math.floor(Math.random() * 8)
+  const handleClick = () => setSelected(randomNumber())
+  const handleVote = () => {
+    const newVotes = [...votes]
+    newVotes[selected] += 1
+    setVotes(newVotes)
+  }
 
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       {anecdotes[selected]}
+      <Votes selected={selected} votes={votes} />
       <Button text={'next anecdote'} onClick={handleClick} />
+      <Button text={'vote'} onClick={handleVote} />
+      <h2>Anecdote with the most votes</h2>
+      <HighlightedAnecdote index={highestVotes} votes={votes} anecdotes={anecdotes}/>
     </div>
   )
 }
