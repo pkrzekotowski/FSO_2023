@@ -9,11 +9,16 @@ const Button = ({ text, onClick }) => {
 }
 
 const Display = ({ good, neutral, bad }) => {
+  const sum = bad + good + neutral
+
   return (
     <>
     <div>good {good}</div>
     <div>neutral {neutral}</div>
     <div>bad {bad}</div>
+    <div>all {bad + good + neutral}</div>
+    <div>average {sum/3}</div>
+    <div>positive {good/sum * 100}%</div>
     </>
   )
 }
