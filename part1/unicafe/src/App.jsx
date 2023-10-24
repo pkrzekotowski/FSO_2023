@@ -10,14 +10,14 @@ const Button = ({ text, onClick }) => {
 
 const StatisticLine = ({ text, value }) => {
   return(
-    <div>
-      {text} {value}
-    </div>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
 const Statistics = ({ good, neutral, bad, sum }) => {
-
   console.log(good, bad, neutral, sum)
 
   if (sum === 0) {
@@ -29,14 +29,14 @@ const Statistics = ({ good, neutral, bad, sum }) => {
   }
 
   return (
-    <>
+    <table>
     <StatisticLine text={'good'} value={good} />
     <StatisticLine text={'neutral'} value={neutral} />
     <StatisticLine text={'bad'} value={bad} />
     <StatisticLine text={'all'} value={sum} />
     <StatisticLine text={'average'} value={sum/3} />
     <StatisticLine text={'positive'} value={good/sum * 100 + '%'} />
-    </>
+    </table>
   )
 }
 
